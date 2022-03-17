@@ -54,13 +54,14 @@ variable "ami_id" {
 variable "ec2_key_pair_name" {
   description = "An existing EC2 key pair used to access the bastion server."
   type        = string
+  default     = "ConsulKeyPair"
 }
 
 # Allowed Traffic into the Bastion
 variable "allowed_bastion_cidr_blocks" {
   description = "List of CIDR blocks allowed to access your Bastion.  Defaults to Everywhere."
   type        = list(string)
-  default     = ["175.176.16.239/32"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "allowed_bastion_cidr_blocks_ipv6" {
@@ -73,7 +74,7 @@ variable "allowed_bastion_cidr_blocks_ipv6" {
 variable "allowed_traffic_cidr_blocks" {
   description = "List of CIDR blocks allowed to access your Bastion.  Defaults to Everywhere."
   type        = list(string)
-  default     = ["175.176.16.239/32"]
+  default     = ["0.0.0.0/0"]
 }
 
 variable "allowed_traffic_cidr_blocks_ipv6" {

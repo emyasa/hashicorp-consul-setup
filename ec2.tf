@@ -1,3 +1,11 @@
+data "template_file" "server_user_data" {
+  template = file("${path.module}/scripts/server.sh")
+}
+
+data "template_file" "client_user_data" {
+  template = file("${path.module}/scripts/client.sh")
+}
+
 resource "aws_instance" "bastion" {
   ami                         = var.ami_id
   instance_type               = "t2.nano"
@@ -24,9 +32,7 @@ resource "aws_instance" "consul_server" {
     { "Project" = var.main_project_tag }
   )
 
-  user_data = base64encode(templatefile("${path.module}/scripts/server.sh", {
-    # for injecting variables
-  }))
+  user_data = data.template_file.server_user_data.rendered
 }
 
 resource "aws_instance" "consul_client" {
@@ -41,7 +47,5 @@ resource "aws_instance" "consul_client" {
     { "Project" = var.main_project_tag }
   )
 
-  user_data = base64encode(templatefile("${path.module}/scripts/client.sh", {
-    # for injecting variables
-  }))
+  user_data = data.template_file.client_user_data.rendered
 }
