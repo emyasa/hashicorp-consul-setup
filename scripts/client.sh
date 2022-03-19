@@ -13,7 +13,7 @@ client_addr = "0.0.0.0"
 
 bind_addr = "0.0.0.0"
 
-bootstrap_expect=1
+retry_join = ["provider=aws tag_key=\"${project_tag}\" tag_value=\"${project_tag_value}\""]
 EOF
 
 # Start Consul

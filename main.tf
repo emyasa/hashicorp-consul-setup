@@ -5,7 +5,7 @@ terraform {
       version = "~> 3.49.0"
     }
     template = {
-      source = "hashicorp/template"
+      source  = "hashicorp/template"
       version = "2.2.0"
     }
   }
@@ -16,9 +16,9 @@ provider "aws" {
 }
 
 data "aws_availability_zones" "available" {
-    state = "available"
-    filter {
-        name = "group-name"
-        values = [var.aws_default_region]
-    }
+  state = "available"
+  filter {
+    name   = "group-name"
+    values = [var.aws_default_region]
+  }
 }
