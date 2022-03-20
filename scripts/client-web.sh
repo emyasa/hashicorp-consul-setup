@@ -62,6 +62,8 @@ EOF
 
 systemctl restart consul
 
+mkdir -p /etc/systemd/resolved.conf.d
+
 # Point DNS to Consul's DNS 
 cat > /etc/systemd/resolved.conf.d/consul.conf <<- EOF
 [Resolve]

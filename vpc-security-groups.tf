@@ -168,6 +168,16 @@ resource "aws_security_group_rule" "consul_client_allow_22_bastion" {
   description              = "Allow SSH traffic from consul bastion."
 }
 
+resource "aws_security_group_rule" "consul_client_allow_9090" {
+  security_group_id        = aws_security_group.consul_client.id
+  type                     = "ingress"
+  protocol                 = "tcp"
+  from_port                = 9090
+  to_port                  = 9090
+  source_security_group_id = aws_security_group.consul_client.id
+  description              = "Allow traffic from Consul Clients for Fake Service."
+}
+
 resource "aws_security_group_rule" "consul_client_allow_outbound" {
   security_group_id = aws_security_group.consul_client.id
   type              = "egress"
