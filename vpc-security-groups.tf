@@ -114,7 +114,17 @@ resource "aws_security_group_rule" "consul_server_allow_client_8301" {
   from_port                = 8301
   to_port                  = 8301
   source_security_group_id = aws_security_group.consul_client.id
-  description              = "Allow traffic from Consul Client."
+  description              = "Allow traffic from Consul Client (Nodes Discovery)."
+}
+
+resource "aws_security_group_rule" "consul_server_allow_client_8300" {
+  security_group_id        = aws_security_group.consul_server.id
+  type                     = "ingress"
+  protocol                 = "tcp"
+  from_port                = 8300
+  to_port                  = 8300
+  source_security_group_id = aws_security_group.consul_client.id
+  description              = "Allow traffic from Consul Client (Running Services Discovery)."
 }
 
 resource "aws_security_group_rule" "consul_server_allow_22_bastion" {
